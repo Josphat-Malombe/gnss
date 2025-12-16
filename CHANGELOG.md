@@ -1,3 +1,5 @@
-## 0.0.1
+## 0.1.0
 
-* TODO: Describe initial release.
+- Initial release
+- Real-time GNSS diagnostics using Android GnssStatus API
+- Per-constellation satellite statistics
