@@ -1,7 +1,6 @@
-# gnss_diagnostics
+# Gnss_diagnostics
 
-A Flutter plugin that provides real-time GNSS (Global Navigation Satellite System) diagnostic
-information on Android devices using the native `GnssStatus` API.
+A Flutter plugin that provides real-time GNSS (Global Navigation Satellite System) diagnostic information on Android devices using the native `GnssStatus` API.
 
 The plugin exposes a broadcast stream that reports:
 - Total satellites in view
@@ -14,11 +13,11 @@ This is useful for GNSS monitoring, diagnostics, and research applications.
 
 ## Features
 
-- Real-time GNSS satellite status updates
-- Per-constellation breakdown (in-view vs used-in-fix)
-- Lightweight, event-based API using `EventChannel`
-- No polling or background services
-- Designed for diagnostics and visualization
+- Real-time GNSS satellite status updates.
+- Per-constellation breakdown (in-view vs used-in-fix).
+- Lightweight, event-based API using `EventChannel`.
+- No polling or background services.
+- Designed for diagnostics and visualization.
 
 ---
 
@@ -41,34 +40,36 @@ Add the dependency to your `pubspec.yaml`:
 ```yaml
 dependencies:
   gnss_diagnostics: ^0.1.0
-
+```
 
 Then run:
-```
+```sh
 flutter pub get
+```
 
 ## Android Setup
-- Minimum SDK
-Ensure your Android project uses minSdkVersion 24 or higher.
+### Minimum SDK
+Ensure your Android project uses `minSdkVersion 24` or higher.
 
-
+```groovy
 defaultConfig {
     minSdkVersion 24
 }
+```
 
+### Permissions
+Add the following permission to your app’s `AndroidManifest.xml`:
 
-- Permissions
-Add the following permission to your app’s AndroidManifest.xml:
-
-
+```xml
 <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+```
 
 At runtime, you must request location permission before accessing the GNSS stream.
 
 ## Usage
-The plugin exposes a broadcast stream of GnssStatusSnapshot.
+The plugin exposes a broadcast stream of `GnssStatusSnapshot`.
 
-
+```dart
 import 'package:flutter/material.dart';
 import 'package:permission_handler/permission_handler.dart';
 import 'package:gnss_diagnostics/gnss_diagnostics.dart';
@@ -109,8 +110,7 @@ class _GnssPageState extends State<GnssPage> {
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return const Center(child: CircularProgressIndicator());
-                }# gnss_diagnostics
-
+                }
 
                 final status = snapshot.data!;
                 return Padding(
@@ -125,41 +125,28 @@ class _GnssPageState extends State<GnssPage> {
     );
   }
 }
-
+```
 
 ## Notes
-GNSS status callbacks are passive.
-
-Satellite data may remain zero until:
-
-Another app actively requests location updates, or
-
-The device acquires a GNSS fix.
-
-Accuracy and availability depend on device hardware and environment.
-
-Background execution is not supported.
-
+- GNSS status callbacks are passive.
+- Satellite data may remain zero until:
+  - Another app actively requests location updates, or
+  - The device acquires a GNSS fix.
+- Accuracy and availability depend on device hardware and environment.
+- Background execution is not supported.
 
 ## Example App
-A complete working example is provided in the /example directory.
+A complete working example is provided in the `/example` directory.
 
 The example demonstrates:
 
-Runtime permission handling
-
-Stream consumption
-
-UI rendering of GNSS constellation data
-
+- Runtime permission handling
+- Stream consumption
+- UI rendering of GNSS constellation data
 
 ## Use Cases
-GNSS diagnostics and debugging
-
-Satellite visibility monitoring
-
-Navigation system analysis
-
-Educational and research tools
-
-Field testing GNSS performance on devices
+- GNSS diagnostics and debugging
+- Satellite visibility monitoring
+- Navigation system analysis
+- Educational and research tools
+- Field testing GNSS performance on devices
